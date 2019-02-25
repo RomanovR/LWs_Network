@@ -10,15 +10,15 @@ PORT = 65432        # The port used by the server
 # Данные к отправке
 data = random()
 data = str(data).encode('utf-8')
+print('Data to send: ', data)
 # Контрольная сумма
 checksum = hashlib.md5(data).digest()
-print('data:', data)
-print('checksum: ', checksum)
 # Сериализация данных
 to_send = pickle.dumps({'data': data, 'checksum': checksum})
-print('Pickle data:', to_send)
-print("Size of data to send: ", to_send.__sizeof__())
 
+print('Connecting...')
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
     s.sendall(to_send)
+    print('Sent.')
+

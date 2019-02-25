@@ -12,16 +12,21 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.listen()
     conn, address = s.accept()
     with conn:
-        print('Connected by', address)
+        print('Connected by ', address)
+        x = 5
         while True:
-            rec_data = pickle.loads(conn.recv(1024))
-            if not rec_data:
+            data_rec = conn.recv(1024)
+            if not data_rec:
                 break
-if hashlib.md5(rec_data['data']).digest() == rec_data['checksum']:
-    print("Data is correct.")
-else:
-    print("Data is corrupted.")
-print("Number:", rec_data['data'])
-print("Checksum:", rec_data['checksum'])
+            try:
+                data = pickle.loads(data_rec)
+                if hashlib.md5(data['data']).digest() != data['checksum']:
+                    print("Data is corrupted.")
+                    
+                print("Number:", float(data['data']))
+            except pickle.UnpicklingError:
+                print("Received incorrect data.")
+
+
 
 
