@@ -1,4 +1,6 @@
 import tkinter as tk
+from platform import system
+
 
 root = tk.Tk()
 
@@ -9,7 +11,21 @@ x_screen_pos = root.winfo_screenwidth() // 2 - window_width // 2
 y_screen_pos = root.winfo_screenheight() // 2 - window_height // 2
 root.geometry('{}x{}+{}+{}'.format(window_width, window_height, x_screen_pos, y_screen_pos))
 root.resizable(False, False)
-root.iconbitmap('email.ico')
+
+platformD = system()
+if platformD == 'Darwin':
+
+    logo_image = 'images/logo.ico.icns'
+
+elif platformD == 'Windows':
+
+    logo_image = 'images/logo.ico'
+
+else:
+
+    logo_image = 'images/logo.xbm'
+
+root.iconbitmap(logo_image)
 
 l_to = tk.Label(root, fg='black', font="Helvetica 10")
 l_to['text'] = 'To:'
