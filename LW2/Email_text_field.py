@@ -1,5 +1,5 @@
-import socket
 import pickle
+import socket
 import tkinter as tk
 from platform import system
 
@@ -29,6 +29,7 @@ def send_event():
             s.sendall(to_send)
             print('Sent.')
             b_send['text'] = 'Sent.'
+
 
 def about_event():
     about = tk.Tk()

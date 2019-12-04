@@ -1,7 +1,8 @@
-import socket
 import pickle
+import smtplib
+import socket
+import ssl
 import sys
-import smtplib, ssl
 
 HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
 PORT = 49001  # Port to listen
@@ -31,8 +32,8 @@ def getmessage():
                     data = (data['To'], data['Theme'], data['Mail'])
                     smtp_server = "smtp.gmail.com"
                     port = 587  # For starttls
-                    sender_email = "xdrond.bot@gmail.com"
-                    password = "DcrqDHpvt9bBEpA"
+                    sender_email = "example@mail.com"
+                    password = "pass"
                     receiver_email = data[0]  # Enter receiver address
                     message = data[2]
 
@@ -58,8 +59,8 @@ def getmessage():
 def sendingmail(data):
     smtp_server = "smtp.gmail.com"
     port = 587  # For starttls
-    sender_email = "xdrond.bot@gmail.com"
-    password = "DcrqDHpvt9bBEpA"
+    sender_email = "example@mail.com"
+    password = "pass"
     receiver_email = data[0]  # Enter receiver address
     message = data[2]
 
